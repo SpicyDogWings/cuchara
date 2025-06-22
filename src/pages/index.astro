@@ -1,9 +1,25 @@
 ---
+import { turso } from "../turso";
 import Layout from "../layouts/Layout.astro";
+
+const { rows } = await turso.execute("SELECT * FROM categorias");
 ---
 
 <Layout>
-    <section>
-        <h1 class="text-6xl">ka</h1>
+    <section class="w-full flex justify-start items-center flex-col">
+        <header class="w-11/12 mt-5">
+            <h1 class="text-6xl text-secondary-400 font-primary-extrabold">
+                Cuchara
+            </h1>
+        </header>
+        <main>
+            <ul>
+                {
+                    rows.map((categorias) => (
+                        <li class="text-primary-300">{categorias.nombre}</li>
+                    ))
+                }
+            </ul>
+        </main>
     </section>
 </Layout>
